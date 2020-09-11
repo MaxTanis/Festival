@@ -8,66 +8,70 @@ using SchoolTemplate.Models;
 
 namespace SchoolTemplate.Controllers
 {
-  public class HomeController : Controller
-  {
-    // zorg ervoor dat je hier je gebruikersnaam (leerlingnummer) en wachtwoord invult
-    string connectionString = "Server=172.16.160.21;Port=3306;Database=110074;Uid=110074;Pwd=uTuRgent;";
-
-    public IActionResult Index()
+    public class HomeController : Controller
     {
-      List<Product> products = new List<Product>();
-      // uncomment deze regel om producten uit je database toe te voegen
-      // products = GetProducts();
+        // zorg ervoor dat je hier je gebruikersnaam (leerlingnummer) en wachtwoord invult
+        string connectionString = "Server=172.16.160.21;Port=3306;Database=110157;Uid=110157;Pwd=crOLeran;";
 
-      return View(products);
-    }
-
-    private List<Product> GetProducts()
-    {
-      List<Product> products = new List<Product>();
-
-      using (MySqlConnection conn = new MySqlConnection(connectionString))
-      {
-        conn.Open();
-        MySqlCommand cmd = new MySqlCommand("select * from product", conn);
-
-        using (var reader = cmd.ExecuteReader())
+        public IActionResult Index()
         {
-          while (reader.Read())
-          {
-            int Id = Convert.ToInt32(reader["Id"]);
-            string Naam = reader["Naam"].ToString();
-            float Calorieen = float.Parse(reader["calorieen"].ToString());
-            string Formaat = reader["Formaat"].ToString();
-            int Gewicht = Convert.ToInt32(reader["Gewicht"].ToString());
-            decimal Prijs = Decimal.Parse(reader["Prijs"].ToString());
+            List<Festival> products = new List<Festival>();
+            products = GetFestivals();
 
-            Product p = new Product
-            {
-              Id = Convert.ToInt32(reader["Id"]),
-              Naam = reader["Naam"].ToString(),
-              Calorieen = float.Parse(reader["calorieen"].ToString()),
-              Formaat = reader["Formaat"].ToString(),
-              Gewicht = Convert.ToInt32(reader["Gewicht"].ToString()),
-              Prijs = Decimal.Parse(reader["Prijs"].ToString())
-            };
-            products.Add(p);
-          }
+            return View(products);
         }
-      }
 
-      return products;
-    }
+        private List<Festival> GetFestivals()
+        {
+            List<Festival> festivals = new List<Festival>();
 
-    public IActionResult Privacy()
-    {
-      return View();
-    }
+            using (MySqlConnection conn = new MySqlConnection(connectionString))
+            {
+                conn.Open();
+                MySqlCommand cmd = new MySqlCommand("select * from festival", conn);
 
-    [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-    public IActionResult Error()
-    {
-      return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+                using (var reader = cmd.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        Festival f = new Festival
+                        {
+                            id = Convert.ToInt32(reader["id"]),
+                            naam = reader["naam"].ToString(),
+                            plaats = reader["plaats"].ToString()
+                        };
+                        festivals.Add(f);
+                    }
+                }
+            }
+
+            return festivals;
+        }
+
+        public IActionResult Privacy()
+        {
+            return View();
+        }
+
+        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
+        public IActionResult Error()
+        {
+            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+        }
+
+
+        [Route("contact")]
+        public IActionResult Contact()
+        {
+            return View();
+        }
+
+        [Route("contact")]
+        [HttpPost]
+        public IActionResult Contact(PersonModel model)
+        {
+            return View(model);
+        }
+
     }
-  }
 }

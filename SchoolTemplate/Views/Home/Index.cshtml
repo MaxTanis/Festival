@@ -1,5 +1,5 @@
 ﻿@using SchoolTemplate.Database;
-@model List<Product>
+@model List<Festival>
 @{
   ViewData["Title"] = "Home Page";
 }
@@ -9,10 +9,10 @@
 <div class="text-center">
   <h1 class="display-4">HOI</h1>
   <ul>
-    @foreach (Product p in Model)
+    @foreach (Festival f in Model)
     {
       <li>
-        @p.Naam @p.Prijs euro
+        @f.naam 
       </li>
     }
   </ul>

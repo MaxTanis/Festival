@@ -1,0 +1,20 @@
+﻿@model PersonModel
+@{
+    ViewData["Title"] = "contact";
+}
+
+<h1>Contact</h1>
+
+<form method="post">
+    <input type="text" name="voornaam" />
+    <input type="text" name="achternaam" />
+    <input type="submit" value="verzenden" />
+</form>
+
+@if(Model != null)
+{
+    <p>
+        @Model.Voornaam <br />
+        @Model.Achternaam <br />
+    </p>
+}
