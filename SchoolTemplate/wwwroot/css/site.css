@@ -65,5 +65,16 @@ body {
 
 .festival_div {
     border: 1px solid black;
-    max-width: 33%;
+    width: 25%;
+    display: inline-block;
+
+}
+
+.festivals {
+    text-align:center;
+    margin: 10px 0 10px 0;
+}
+
+.festivals > div:nth-child(even) {
+    margin: 0 10px 0 10px;
 }

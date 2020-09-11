@@ -4,13 +4,18 @@
     ViewData["Title"] = "informatie";
 }
 
-<div class="text-center">
-    <h1 class="display-4"></h1>
+<div class="container">
+   
+    <div class="festivals">
         @foreach (Festival f in Model)
         {
             <div class="festival_div">
-                @f.naam
+                @f.naam<br />
+                @f.plaats<br />
+                @f.start_dt
+
             </div>
         }
+    </div>
 
 </div>
