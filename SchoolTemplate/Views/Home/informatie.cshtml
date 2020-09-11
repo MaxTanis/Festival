@@ -1,0 +1,16 @@
+﻿@using SchoolTemplate.Database;
+@model List<Festival>
+@{
+    ViewData["Title"] = "informatie";
+}
+
+<div class="text-center">
+    <h1 class="display-4"></h1>
+        @foreach (Festival f in Model)
+        {
+            <div class="festival_div">
+                @f.naam
+            </div>
+        }
+
+</div>

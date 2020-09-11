@@ -14,11 +14,8 @@ namespace SchoolTemplate.Controllers
         string connectionString = "Server=172.16.160.21;Port=3306;Database=110157;Uid=110157;Pwd=crOLeran;";
 
         public IActionResult Index()
-        {
-            List<Festival> products = new List<Festival>();
-            products = GetFestivals();
-
-            return View(products);
+        { 
+            return View();
         }
 
         private List<Festival> GetFestivals()
@@ -38,7 +35,8 @@ namespace SchoolTemplate.Controllers
                         {
                             id = Convert.ToInt32(reader["id"]),
                             naam = reader["naam"].ToString(),
-                            plaats = reader["plaats"].ToString()
+                            plaats = reader["plaats"].ToString(),
+                            // start_dt = 
                         };
                         festivals.Add(f);
                     }
@@ -71,6 +69,15 @@ namespace SchoolTemplate.Controllers
         public IActionResult Contact(PersonModel model)
         {
             return View(model);
+        }
+
+        [Route("informatie")]
+        public IActionResult Informatie()
+        {
+            List<Festival> products = new List<Festival>();
+            products = GetFestivals();
+
+            return View(products);
         }
 
     }
