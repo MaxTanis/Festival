@@ -19,6 +19,9 @@ body {
     position: fixed;
     left: 0;
     right: 0;
+    /* background-image: url("/images/festival.jpg"); 
+    height:450px;*/
+    background-position:center;
 }
 
     .nav-bar a {
@@ -53,6 +56,11 @@ body {
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 
+.content {
+    padding: 0 10px 10px 10px;
+    text-align:center;
+}
+
 .img {
     width: 100%;
     margin-top: 20px;
@@ -67,7 +75,6 @@ body {
     border: 1px solid black;
     width: 25%;
     display: inline-block;
-
 }
 
 .festivals {
@@ -77,4 +84,33 @@ body {
 
 .festivals > div:nth-child(even) {
     margin: 0 10px 0 10px;
+}
+
+.contact-form {
+    margin-left: 20%;
+    max-width:60%;
+    padding:10px;
+    text-align:left;
+}
+
+.contact-form input[type="text"] {
+    font-size: 20px;
+    display: block;
+    width: 100%;
+    padding: 5px 10px;
+    margin-top: 5px;
+    border: 2px solid #379683;
+    border-radius: 5px;
+}
+
+.button {
+    background-color: #379683;
+    color: #ffffff;
+    padding: 10px 20px;
+    font-size: 20px;
+    border: 1px solid transparent;
+    border-radius: 5px;
+    box-shadow: 0 30px 60px 0 rgba(0,0,0,0.3);
+    cursor: pointer;
+    margin-top: 10px;
 }
