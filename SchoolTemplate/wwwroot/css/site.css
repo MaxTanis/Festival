@@ -21,7 +21,7 @@ body {
     right: 0;
 }
 
-    .nav-bar a {
+       .nav-bar a {
         color: white;
         text-align: center;
         padding: 14px 16px;
@@ -77,4 +77,8 @@ body {
 
 .festivals > div:nth-child(even) {
     margin: 0 10px 0 10px;
+}
+
+h1 {
+    text-align: center;
 }

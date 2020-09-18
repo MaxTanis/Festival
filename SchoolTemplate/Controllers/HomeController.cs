@@ -31,12 +31,19 @@ namespace SchoolTemplate.Controllers
                 {
                     while (reader.Read())
                     {
+                        int id = Convert.ToInt32(reader["id"]);
+                        string naam = reader["naam"].ToString();
+                        string plaats = reader["plaats"].ToString();
+
+                        DateTime start_dt;
+                        DateTime.TryParse(reader["start_dt"] as string, out start_dt);
+
                         Festival f = new Festival
                         {
-                            id = Convert.ToInt32(reader["id"]),
-                            naam = reader["naam"].ToString(),
-                            plaats = reader["plaats"].ToString(),
-                            start_dt = DateTime.Parse(reader["start_dt"] as string)
+                            id = id,
+                            naam = naam,
+                            plaats = plaats,
+                            start_dt = start_dt
                         };
                         festivals.Add(f);
                     }
