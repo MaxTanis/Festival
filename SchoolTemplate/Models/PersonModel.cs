@@ -9,11 +9,18 @@ namespace SchoolTemplate.Models
 {
     public class PersonModel
     {
-        [Required(ErrorMessage = "Naam is verplicht")]
-        public string Naam { set; get; }
+        [Required(ErrorMessage = "Voornaam is verplicht")]
+        public string Voornaam { set; get; }
+
+        [Required(ErrorMessage = "Achternaam is verplicht")]
+        public string Achternaam { set; get; }
 
         [Required(ErrorMessage = "Email is verplicht")]
         [EmailAddress]
         public string Email { set; get; }
+
+        [Required(ErrorMessage = "Email is verplicht")]
+        [EmailAddress]
+        public string Geb_datum { set; get; }
     }
 }

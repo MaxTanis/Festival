@@ -7,15 +7,23 @@
 
 <div class="contact-form">
     <form method="post">
-        @Html.ValidationMessageFor(m => m.Naam) <br />
+        @Html.ValidationMessageFor(m => m.Voornaam) <br />
         @Html.ValidationMessageFor(m => m.Email) <br />
         <label>
             Voornaam: *
-            <input type="text" name="naam" autocomplete="off" autofocus="true" value="@Model?.Naam"/>
+            <input type="text" name="voornaam" autocomplete="off" autofocus="true" value="@Model?.Voornaam" />
+        </label>
+        <label>
+            Achternaam: *
+            <input type="text" name="achternaam" autocomplete="off" value="@Model?.Achternaam" />
         </label>
         <label>
             E-mail: *
-            <input type="text" name="email" autocomplete="off" />
+            <input type="text" name="email" autocomplete="off" value="@Model?.Email"/>
+        </label>
+        <label>
+            Geboorte datum: *
+            <input type="text" name="geb_datum" autocomplete="off" value="@Model?.Geb_datum" />
         </label>
         <input class="button" type="submit" value="verzenden" />
     </form>
