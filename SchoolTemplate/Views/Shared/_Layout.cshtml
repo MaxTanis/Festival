@@ -5,6 +5,7 @@
     <link rel="stylesheet" href="~/css/site.css" />
 </head>
 <body>
+    
     <div class="nav-bar">
         <a href="/">Home</a>
         <a href="/informatie">Informatie</a>
@@ -13,7 +14,10 @@
     </div>
 
     <div class="wrapper">
-        @RenderBody()
+        <div class="content">
+            @RenderBody()
+
+        </div>
         <div class="footer">
             footer
         </div>

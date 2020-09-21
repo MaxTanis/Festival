@@ -5,16 +5,18 @@
 
 <h1>Contact</h1>
 
-<form method="post">
-    <input type="text" name="voornaam" />
-    <input type="text" name="achternaam" />
-    <input type="submit" value="verzenden" />
-</form>
-
-@if(Model != null)
-{
-    <p>
-        @Model.Voornaam <br />
-        @Model.Achternaam <br />
-    </p>
-}
+<div class="contact-form">
+    <form method="post">
+        @Html.ValidationMessageFor(m => m.Naam) <br />
+        @Html.ValidationMessageFor(m => m.Email) <br />
+        <label>
+            Voornaam: *
+            <input type="text" name="naam" autocomplete="off" autofocus="true" value="@Model?.Naam"/>
+        </label>
+        <label>
+            E-mail: *
+            <input type="text" name="email" autocomplete="off" />
+        </label>
+        <input class="button" type="submit" value="verzenden" />
+    </form>
+</div>

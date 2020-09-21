@@ -9,12 +9,14 @@
     <div class="festivals">
         @foreach (Festival f in Model)
         {
-            <div class="festival_div">
-                @f.naam<br />
+        <div class="festival_div">
+            @f.naam<br />
+            @if (f.plaats != "")
+            {
                 @f.plaats<br />
-                @f.start_dt
-
-            </div>
+            }
+            @f.start_dt
+        </div>
         }
     </div>
 
