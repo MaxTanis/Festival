@@ -11,7 +11,7 @@
         @Html.ValidationMessageFor(m => m.Email) <br />
         <label>
             Voornaam: *
-            <input type="text" name="naam" autocomplete="off" autofocus="true" />
+            <input type="text" name="naam" autocomplete="off" autofocus="true" value="@Model?.Naam"/>
         </label>
         <label>
             E-mail: *
@@ -19,12 +19,4 @@
         </label>
         <input class="button" type="submit" value="verzenden" />
     </form>
-
-    @if (Model != null)
-    {
-        <p>
-            @Model.Naam <br />
-            @Model.Email<br />
-        </p>
-    }
 </div>
