@@ -68,7 +68,14 @@ namespace SchoolTemplate.Controllers
         [HttpPost]
         public IActionResult Contact(PersonModel model)
         {
-            return View(model);
+            // als form niet goed is ingevuld
+            if(!ModelState.IsValid)
+                return View(model);
+
+            // wel geod ingevuld
+            SavePerson(model);
+
+            return Redirect("/gelukt");
         }
 
         [Route("informatie")]
@@ -80,5 +87,27 @@ namespace SchoolTemplate.Controllers
             return View(products);
         }
 
+        private void SavePerson(PersonModel person)
+        {
+            using (MySqlConnection conn = new MySqlConnection(connectionString))
+            {
+                conn.Open();
+                MySqlCommand cmd = new MySqlCommand("INSERT INTO klant(voornaam, achternaam, emailadres, geb_datum) VALUES (?voornaam, ?achternaam, ?email, ?geb_datum)", conn);
+
+                cmd.Parameters.Add("?voornaam", MySqlDbType.VarChar).Value = person.Voornaam;
+                cmd.Parameters.Add("?achternaam", MySqlDbType.VarChar).Value = person.Achternaam;
+                cmd.Parameters.Add("?email", MySqlDbType.VarChar).Value = person.Email;
+                cmd.Parameters.Add("?geb_datum", MySqlDbType.VarChar).Value = person.Geb_datum;
+                cmd.ExecuteNonQuery();
+            }
+
+        }
+        [Route("gelukt")]
+        public IActionResult Gelukt()
+        {
+            return View();
+
+        }
     }
+    
 }

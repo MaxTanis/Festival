@@ -4,6 +4,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 using System;
+using MySql.Data.MySqlClient;
 
 namespace SchoolTemplate.Models
 {
@@ -19,8 +20,10 @@ namespace SchoolTemplate.Models
         [EmailAddress]
         public string Email { set; get; }
 
-        [Required(ErrorMessage = "Email is verplicht")]
-        [EmailAddress]
+        [Required(ErrorMessage = "Geboorte datum is verplicht")]
+        [DataType(DataType.DateTime)]
         public string Geb_datum { set; get; }
     }
+
+    
 }

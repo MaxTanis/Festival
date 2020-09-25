@@ -8,7 +8,9 @@
 <div class="contact-form">
     <form method="post">
         @Html.ValidationMessageFor(m => m.Voornaam) <br />
+        @Html.ValidationMessageFor(m => m.Achternaam) <br />
         @Html.ValidationMessageFor(m => m.Email) <br />
+        @Html.ValidationMessageFor(m => m.Geb_datum) <br />
         <label>
             Voornaam: *
             <input type="text" name="voornaam" autocomplete="off" autofocus="true" value="@Model?.Voornaam" />

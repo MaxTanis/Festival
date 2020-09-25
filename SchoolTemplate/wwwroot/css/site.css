@@ -19,19 +19,24 @@ body {
     position: fixed;
     left: 0;
     right: 0;
-    /* background-image: url("/images/festival.jpg"); 
-    height:450px;*/
-    background-position:center;
+    
 }
 
-    .nav-bar a {
-        color: white;
-        text-align: center;
-        padding: 14px 16px;
-        text-decoration: none;
-        font-size: 17px;
-        margin: 4px 7px 4px 7px;
-    }
+.nav_img {
+    background-image: url("/images/festival.jpg");
+    background-position: center;
+    height: 450px;
+    margin:0;
+}
+
+.nav-bar a {
+    color: white;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+    font-size: 17px;
+    margin: 4px 7px 4px 7px;
+}
 
 .asnav-bar a:active {
     color: red;
