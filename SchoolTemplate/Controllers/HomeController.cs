@@ -11,7 +11,7 @@ namespace SchoolTemplate.Controllers
     public class HomeController : Controller
     {
         // zorg ervoor dat je hier je gebruikersnaam (leerlingnummer) en wachtwoord invult
-        string connectionString = "Server=172.16.160.21;Port=3306;Database=110157;Uid=110157;Pwd=crOLeran;";
+        string connectionString = "Server=172.16.160.21;Port=3306;Database=110074;Uid=110074;Pwd=uTuRgent;";
 
         public IActionResult Index()
         { 
@@ -78,8 +78,8 @@ namespace SchoolTemplate.Controllers
             return Redirect("/gelukt");
         }
 
-        [Route("informatie")]
-        public IActionResult Informatie()
+        [Route("overzicht")]
+        public IActionResult Overzicht()
         {
             List<Festival> products = new List<Festival>();
             products = GetFestivals();
@@ -104,6 +104,13 @@ namespace SchoolTemplate.Controllers
         }
         [Route("gelukt")]
         public IActionResult Gelukt()
+        {
+            return View();
+
+        }
+
+        [Route("informatie")]
+        public IActionResult informatie()
         {
             return View();
 
