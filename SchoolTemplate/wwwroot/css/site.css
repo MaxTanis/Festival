@@ -119,3 +119,8 @@ body {
     cursor: pointer;
     margin-top: 10px;
 }
+
+#gelukt_img {
+    width: 30%;
+    height: auto;
+}
