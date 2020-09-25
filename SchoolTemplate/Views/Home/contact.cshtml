@@ -8,25 +8,20 @@
 <div class="contact-form">
     <form method="post">
 
-        @Html.ValidationMessageFor(m => m.Voornaam) <br />
-        @Html.ValidationMessageFor(m => m.Achternaam) <br />
-        @Html.ValidationMessageFor(m => m.Email) <br />
-        @Html.ValidationMessageFor(m => m.Geb_datum) <br />
-        
         <label>
-            Voornaam: *
+            Voornaam: * @Html.ValidationMessageFor(m => m.Voornaam) <br />
             <input type="text" name="voornaam" autocomplete="off" autofocus="true" value="@Model?.Voornaam" />
         </label>
         <label>
-            Achternaam: *
+            Achternaam: *  @Html.ValidationMessageFor(m => m.Achternaam) <br />
             <input type="text" name="achternaam" autocomplete="off" value="@Model?.Achternaam" />
         </label>
         <label>
-            E-mail: *
-            <input type="text" name="email" autocomplete="off" value="@Model?.Email"/>
+            E-mail: *   @Html.ValidationMessageFor(m => m.Email) <br />
+            <input type="text" name="email" autocomplete="off" value="@Model?.Email" />
         </label>
         <label>
-            Geboorte datum: *
+            Geboorte datum: *  @Html.ValidationMessageFor(m => m.Geb_datum) <br />
             <input type="text" name="geb_datum" autocomplete="off" value="@Model?.Geb_datum" />
         </label>
         <input class="button" type="submit" value="verzenden" />

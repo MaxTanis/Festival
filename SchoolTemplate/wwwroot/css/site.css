@@ -124,3 +124,7 @@ body {
     width: 30%;
     height: auto;
 }
+
+.field-validation-error {
+    color: red;
+}
