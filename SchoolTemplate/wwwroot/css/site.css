@@ -53,17 +53,16 @@ body {
 }
 
 .wrapper {
-    background: white;
+    background: #379683;
     width: 60%;
     margin-left: 20%;
-    margin-top: 80px;
     display: inline-block;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 
 .content {
-    padding: 0 10px 10px 10px;
     text-align:center;
+    padding-top:60px;
 }
 
 .img {
@@ -76,19 +75,23 @@ body {
     color:white;
 }
 
-.festival_div {
-    border: 1px solid black;
-    width: 25%;
-    display: inline-block;
+.festivals {
+    display:flex;
+    flex-wrap:wrap;
+    text-align: center;
+    margin: 10px 0 10px 0;
+    justify-content:center;
 }
 
-.festivals {
-    text-align:center;
-    margin: 10px 0 10px 0;
+.festival_div {
+    border: 1px solid black;
+    margin-top:10px;
+    background-color:white;
+    margin: 0 10px 0 10px;
 }
 
 .festivals > div:nth-child(even) {
-    margin: 0 10px 0 10px;
+    
 }
 
 .contact-form {
@@ -127,4 +130,9 @@ body {
 
 .field-validation-error {
     color: red;
+}
+
+.festival_img {
+    max-width:100px;
+    height:auto;
 }
