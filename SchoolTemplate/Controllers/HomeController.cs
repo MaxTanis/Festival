@@ -18,7 +18,38 @@ namespace SchoolTemplate.Controllers
             return View();
         }
 
-        private List<Festival> GetFestivals(string id)
+        private List<Festival> GetFestivals()
+        {
+            List<Festival> festivals = new List<Festival>();
+
+            using (MySqlConnection conn = new MySqlConnection(connectionString))
+            {
+                conn.Open();
+                MySqlCommand cmd = new MySqlCommand($"select * from festival", conn);
+
+                using (var reader = cmd.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        Festival f = new Festival
+                        {
+                            id = Convert.ToInt32(reader["id"]),
+                            naam = reader["naam"].ToString(),
+                            plaats = reader["plaats"].ToString(),
+                            image = reader["image"].ToString(),
+                            // start_dt = DateTime.Parse(reader["start_dt"].ToString()),
+                            // eind_dt = DateTime.Parse(reader["eind_dt"].ToString())
+
+                        };
+                        festivals.Add(f);
+                    }
+                }
+            }
+
+            return festivals;
+        }
+
+        private List<Festival> GetFestival(string id)
         {
             List<Festival> festivals = new List<Festival>();
 
@@ -86,7 +117,7 @@ namespace SchoolTemplate.Controllers
         {
             List<Festival> festivals = new List<Festival>();
             int id = 0;
-            festivals = GetFestivals(id);
+            festivals = GetFestivals();
 
             return View(festivals);
         }
@@ -124,7 +155,7 @@ namespace SchoolTemplate.Controllers
         public IActionResult Festival (string id)
         {
             List<Festival> festivals = new List<Festival>();
-            festivals = GetFestivals(id);
+            festivals = GetFestival(id);
             ViewData["id"] = id;
             
 
