@@ -5,7 +5,7 @@ html {
 }
 
 body {
-    background: #22db97;
+    background: #00B832;
     margin-top: 0px;
     height: 200px;
     background-color: #22db97; /* For browsers that do not support gradients */
@@ -22,11 +22,25 @@ body {
     
 }
 
+.Titelhome p {
+    font-weight: bold;
+}
+
+.Titelhome {
+    opacity: 0.7;
+    background-color: white;
+    color: #6d0404;
+    margin-right: 60%;
+    margin-left: 1%;
+    margin-top: 1%;
+}
+
 .nav_img {
     background-image: url("/images/festival.jpg");
     background-position: center;
     height: 450px;
     margin:0;
+    padding-top: 1px;
 }
 
 .nav-bar a {
@@ -61,8 +75,9 @@ body {
 }
 
 .content {
-    text-align:center;
-    padding-top:60px;
+    text-align: center;
+    padding-top: 60px;
+    background-color: #87e7c3;
 }
 
 .img {
@@ -136,3 +151,4 @@ body {
     max-width:100px;
     height:auto;
 }
+
