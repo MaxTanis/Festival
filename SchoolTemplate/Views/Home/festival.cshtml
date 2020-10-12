@@ -1,0 +1,18 @@
+﻿@using SchoolTemplate.Database;
+@model List<Festival>
+@{
+    ViewData["Title"] = "Festival";
+}
+@foreach (Festival f in Model)
+{
+    
+    @f.naam<br />
+    @if (f.plaats != "")
+    {
+        @f.plaats<br />
+    }
+    @f.start_dt <br />
+    <img class="festival_img" src="@f.image" /><br />
+        
+
+}

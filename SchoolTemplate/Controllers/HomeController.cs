@@ -18,14 +18,14 @@ namespace SchoolTemplate.Controllers
             return View();
         }
 
-        private List<Festival> GetFestivals()
+        private List<Festival> GetFestivals(string id)
         {
             List<Festival> festivals = new List<Festival>();
 
             using (MySqlConnection conn = new MySqlConnection(connectionString))
             {
                 conn.Open();
-                MySqlCommand cmd = new MySqlCommand("select * from festival", conn);
+                MySqlCommand cmd = new MySqlCommand($"select * from festival WHERE id= {id} ", conn);
 
                 using (var reader = cmd.ExecuteReader())
                 {
@@ -36,8 +36,10 @@ namespace SchoolTemplate.Controllers
                             id = Convert.ToInt32(reader["id"]),
                             naam = reader["naam"].ToString(),
                             plaats = reader["plaats"].ToString(),
-                            image = reader["image"].ToString()
-                            // start_dt = DateTime.Parse(reader["start_dt"] as string)
+                            image = reader["image"].ToString(),
+                            // start_dt = DateTime.Parse(reader["start_dt"].ToString()),
+                            // eind_dt = DateTime.Parse(reader["eind_dt"].ToString())
+
                         };
                         festivals.Add(f);
                     }
@@ -82,10 +84,11 @@ namespace SchoolTemplate.Controllers
         [Route("overzicht")]
         public IActionResult Overzicht()
         {
-            List<Festival> products = new List<Festival>();
-            products = GetFestivals();
+            List<Festival> festivals = new List<Festival>();
+            int id = 0;
+            festivals = GetFestivals(id);
 
-            return View(products);
+            return View(festivals);
         }
 
         private void SavePerson(PersonModel person)
@@ -116,6 +119,19 @@ namespace SchoolTemplate.Controllers
             return View();
 
         }
+
+        [Route("festival/{id}")]
+        public IActionResult Festival (string id)
+        {
+            List<Festival> festivals = new List<Festival>();
+            festivals = GetFestivals(id);
+            ViewData["id"] = id;
+            
+
+            return View(festivals);
+        }
+
+        
     }
     
 }
