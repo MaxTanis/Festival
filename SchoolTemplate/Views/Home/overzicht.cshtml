@@ -1,25 +1,21 @@
 ﻿@using SchoolTemplate.Database;
 @model List<Festival>
-@{
-    ViewData["Title"] = "overzicht";
-}
+@{ ViewData["Title"] = "overzicht"; }
 
 <div class="container">
 
     <div class="festivals">
         @foreach (Festival f in Model)
         {
-            <div class="festival_div">
-                @f.naam<br />
+            <div class="festival_div" onclick="location.href='festival/@f.id'">
+                <h2>@f.naam<br /></h2>
                 @if (f.plaats != "")
                 {
-                    @f.plaats<br />
-                }
+                    <h3>@f.plaats<br /></h3>                
+                    }
                 @f.start_dt <br />
-                <img class="festival_img" src="@f.image"/><br/>
-                <button onclick="location.href='festival/@f.id'">Tickets</button>
+                <img class="festival_img" src="@f.image" /><br />
             </div>
-        }
+            }
     </div>
-
 </div>

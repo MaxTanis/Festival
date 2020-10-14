@@ -3,6 +3,7 @@
 @{
     ViewData["Title"] = "Festival";
 }
+
 @foreach (Festival f in Model)
 {
     
@@ -12,12 +13,6 @@
         @f.plaats<br />
     }
     @f.start_dt <br />
-    <img class="festival_img" src="@f.image" /><br />
-        
+    <img class="festival_img" src="@f.image" />        
 
 }
-
-<form method="post">
-    <label></label>
-
-</form>
