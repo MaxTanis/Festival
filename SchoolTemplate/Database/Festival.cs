@@ -14,6 +14,8 @@ namespace SchoolTemplate.Database
 
         public DateTime eind_dt { get; set; }
 
+        public int tickets { get; set; }
+
         public string image { get; set; }
     }
 

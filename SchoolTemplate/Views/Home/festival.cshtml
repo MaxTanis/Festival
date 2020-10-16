@@ -13,11 +13,22 @@
     }
     @f.start_dt <br />
     <img class="festival_img" src="@f.image" /><br />
+    @f.tickets
         
 
 }
 
 <form method="post">
-    <label></label>
+    <label>
+        Tickets:
+        <select name="tickets">
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+        </select>
+    </label>
 
+    <input type="submit">
 </form>
+
+

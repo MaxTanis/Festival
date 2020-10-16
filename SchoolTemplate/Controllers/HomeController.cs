@@ -68,8 +68,9 @@ namespace SchoolTemplate.Controllers
                             naam = reader["naam"].ToString(),
                             plaats = reader["plaats"].ToString(),
                             image = reader["image"].ToString(),
-                            // start_dt = DateTime.Parse(reader["start_dt"].ToString()),
-                            // eind_dt = DateTime.Parse(reader["eind_dt"].ToString())
+                            tickets = Convert.ToInt32(reader["tickets"]),
+                            start_dt = DateTime.Parse(reader["start_dt"].ToString()),
+                            eind_dt = DateTime.Parse(reader["eind_dt"].ToString())
 
                         };
                         festivals.Add(f);
@@ -162,7 +163,32 @@ namespace SchoolTemplate.Controllers
             return View(festivals);
         }
 
-        
+        private void SaveTickets(Festival festival)
+        {
+            using (MySqlConnection conn = new MySqlConnection(connectionString))
+            {
+                conn.Open();
+                MySqlCommand cmd = new MySqlCommand($"UPDATE festival SET tickets = tickets - {festival.tickets} WHERE id = {festival.id}", conn);
+
+                cmd.Parameters.Add("?tickets", MySqlDbType.Int32).Value = festival.tickets;
+                cmd.Parameters.Add("?id", MySqlDbType.Int32).Value = festival.id;
+                cmd.ExecuteNonQuery();
+            }
+
+        }
+        [Route("festival/{id}")]
+        [HttpPost]
+        public IActionResult Festival(Festival model)
+        {
+            // als form niet goed is ingevuld
+            if (!ModelState.IsValid)
+                return View(model);
+
+            // wel geod ingevuld
+            SaveTickets(model);
+
+            return Redirect("/gelukt");
+        }
     }
     
 }
