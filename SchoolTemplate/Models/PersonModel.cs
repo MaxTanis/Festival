@@ -21,7 +21,7 @@ namespace SchoolTemplate.Models
         public string Email { set; get; }
 
         [Required(ErrorMessage = "Geboorte datum is verplicht")]
-        [DataType(DataType.DateTime)]
+        [DataType(DataType.DateTime, ErrorMessage = "Invalid Datetime")]
         public string Geb_datum { set; get; }
     }
 

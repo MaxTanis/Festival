@@ -11,8 +11,8 @@ namespace SchoolTemplate.Controllers
     public class HomeController : Controller
     {
         // zorg ervoor dat je hier je gebruikersnaam (leerlingnummer) en wachtwoord invult
-        //string connectionString = "Server=172.16.160.21;Port=3306;Database=110074;Uid=110074;Pwd=uTuRgent;";
-        string connectionString = "Server=informatica.st-maartenscollege.nl;Port=3306;Database=110074;Uid=110074;Pwd=uTuRgent;";
+        string connectionString = "Server=172.16.160.21;Port=3306;Database=110074;Uid=110074;Pwd=uTuRgent;";
+        //string connectionString = "Server=informatica.st-maartenscollege.nl;Port=3306;Database=110074;Uid=110074;Pwd=uTuRgent;";
 
         public IActionResult Index()
         {
@@ -50,40 +50,6 @@ namespace SchoolTemplate.Controllers
 
             return festivals;
         }
-
-
-        // functie die festival per id ophaalt voor detail pagina
-        private List<Festival> GetFestival(string id)
-        {
-            List<Festival> festivals = new List<Festival>();
-
-            using (MySqlConnection conn = new MySqlConnection(connectionString))
-            {
-                conn.Open();
-                MySqlCommand cmd = new MySqlCommand($"select * from festival WHERE id= {id} ", conn);
-
-                using (var reader = cmd.ExecuteReader())
-                {
-                    while (reader.Read())
-                    {
-                        Festival f = new Festival
-                        {
-                            id = Convert.ToInt32(reader["id"]),
-                            naam = reader["naam"].ToString(),
-                            plaats = reader["plaats"].ToString(),
-                            image = reader["image"].ToString(),
-                            start_dt = DateTime.Parse(reader["start_dt"].ToString()),
-                            eind_dt = DateTime.Parse(reader["eind_dt"].ToString())
-
-                        };
-                        festivals.Add(f);
-                    }
-                }
-            }
-
-            return festivals;
-        }
-
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
@@ -157,14 +123,41 @@ namespace SchoolTemplate.Controllers
         [Route("festival/{id}")]
         public IActionResult Festival(string id)
         {
-            List<Festival> festivals = new List<Festival>();
-            festivals = GetFestival(id);
-            ViewData["id"] = id;
+            var model = GetFestival(id);
 
-
-            return View(festivals);
+            return View(model);
         }
 
+        // functie om specifiek festival op te halen
+        private Festival GetFestival(string id)
+        {
+            List<Festival> festivals = new List<Festival>();
+
+            using (MySqlConnection conn = new MySqlConnection(connectionString))
+            {
+                conn.Open();
+                MySqlCommand cmd = new MySqlCommand($"select * from festival where id = {id}", conn);
+
+                using (var reader = cmd.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        Festival p = new Festival
+                        {
+                            id = Convert.ToInt32(reader["id"]),
+                            naam = reader["naam"].ToString(),
+                            plaats = reader["plaats"].ToString(),
+                            image = reader["image"].ToString(),
+                            start_dt = DateTime.Parse(reader["start_dt"].ToString()),
+                            eind_dt = DateTime.Parse(reader["eind_dt"].ToString()),
+                        };
+                        festivals.Add(p);
+                    }
+                }
+            }
+
+            return festivals[0];
+        }
 
     }
 

@@ -1,34 +1,13 @@
-﻿@using SchoolTemplate.Database;
-@model List<Festival>
+﻿@model SchoolTemplate.Database.Festival
 @{
     ViewData["Title"] = "Festival";
 }
-@foreach (Festival f in Model)
-{
-    
-    @f.naam<br />
-    @if (f.plaats != "")
-    {
-        @f.plaats<br />
-    }
-    @f.start_dt <br />
-    <img class="festival_img" src="@f.image" /><br />
-    @f.tickets
-        
 
-}
-
-<form method="post">
-    <label>
-        Tickets:
-        <select name="tickets">
-            <option value="1">1</option>
-            <option value="2">2</option>
-            <option value="3">3</option>
-        </select>
-    </label>
-
-    <input type="submit">
-</form>
-
-
+<h1>@Model.naam</h1>
+    Plaats: @Model.plaats<br />
+    Start: @Model.start_dt.ToString("D") <br />
+    Eind: @Model.eind_dt.ToString("D")<br />
+    <img class="festival_img" src='@Model.image'/> <br />
+<button class="button" onclick="location.href='/overzicht'">
+    Terug
+</button>
