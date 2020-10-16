@@ -11,13 +11,15 @@ namespace SchoolTemplate.Controllers
     public class HomeController : Controller
     {
         // zorg ervoor dat je hier je gebruikersnaam (leerlingnummer) en wachtwoord invult
-        string connectionString = "Server=172.16.160.21;Port=3306;Database=110074;Uid=110074;Pwd=uTuRgent;";
+        //string connectionString = "Server=172.16.160.21;Port=3306;Database=110074;Uid=110074;Pwd=uTuRgent;";
+        string connectionString = "Server=informatica.st-maartenscollege.nl;Port=3306;Database=110074;Uid=110074;Pwd=uTuRgent;";
 
         public IActionResult Index()
-        { 
+        {
             return View();
         }
 
+        // functie die alle festivals ophaalt voor overzicht 
         private List<Festival> GetFestivals()
         {
             List<Festival> festivals = new List<Festival>();
@@ -37,8 +39,8 @@ namespace SchoolTemplate.Controllers
                             naam = reader["naam"].ToString(),
                             plaats = reader["plaats"].ToString(),
                             image = reader["image"].ToString(),
-                            // start_dt = DateTime.Parse(reader["start_dt"].ToString()),
-                            // eind_dt = DateTime.Parse(reader["eind_dt"].ToString())
+                            start_dt = DateTime.Parse(reader["start_dt"].ToString()),
+                            eind_dt = DateTime.Parse(reader["eind_dt"].ToString())
 
                         };
                         festivals.Add(f);
@@ -49,6 +51,8 @@ namespace SchoolTemplate.Controllers
             return festivals;
         }
 
+
+        // functie die festival per id ophaalt voor detail pagina
         private List<Festival> GetFestival(string id)
         {
             List<Festival> festivals = new List<Festival>();
@@ -68,7 +72,6 @@ namespace SchoolTemplate.Controllers
                             naam = reader["naam"].ToString(),
                             plaats = reader["plaats"].ToString(),
                             image = reader["image"].ToString(),
-                            tickets = Convert.ToInt32(reader["tickets"]),
                             start_dt = DateTime.Parse(reader["start_dt"].ToString()),
                             eind_dt = DateTime.Parse(reader["eind_dt"].ToString())
 
@@ -81,10 +84,6 @@ namespace SchoolTemplate.Controllers
             return festivals;
         }
 
-        public IActionResult Privacy()
-        {
-            return View();
-        }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
@@ -92,19 +91,19 @@ namespace SchoolTemplate.Controllers
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
 
-
         [Route("contact")]
         public IActionResult Contact()
         {
             return View();
         }
 
+        // word uitgevoerd nadat contact form in gepost
         [Route("contact")]
         [HttpPost]
         public IActionResult Contact(PersonModel model)
         {
             // als form niet goed is ingevuld
-            if(!ModelState.IsValid)
+            if (!ModelState.IsValid)
                 return View(model);
 
             // wel geod ingevuld
@@ -117,12 +116,12 @@ namespace SchoolTemplate.Controllers
         public IActionResult Overzicht()
         {
             List<Festival> festivals = new List<Festival>();
-            int id = 0;
             festivals = GetFestivals();
 
             return View(festivals);
         }
 
+        // slaat de gegevens op van iemand die form heeft ingevuld
         private void SavePerson(PersonModel person)
         {
             using (MySqlConnection conn = new MySqlConnection(connectionString))
@@ -138,6 +137,8 @@ namespace SchoolTemplate.Controllers
             }
 
         }
+
+        // pagina die wordt getoond nadat form geldig is ingevuld
         [Route("gelukt")]
         public IActionResult Gelukt()
         {
@@ -152,43 +153,19 @@ namespace SchoolTemplate.Controllers
 
         }
 
+        // detail pagina voor festival
         [Route("festival/{id}")]
-        public IActionResult Festival (string id)
+        public IActionResult Festival(string id)
         {
             List<Festival> festivals = new List<Festival>();
             festivals = GetFestival(id);
             ViewData["id"] = id;
-            
+
 
             return View(festivals);
         }
 
-        private void SaveTickets(Festival festival)
-        {
-            using (MySqlConnection conn = new MySqlConnection(connectionString))
-            {
-                conn.Open();
-                MySqlCommand cmd = new MySqlCommand($"UPDATE festival SET tickets = tickets - {festival.tickets} WHERE id = {festival.id}", conn);
 
-                cmd.Parameters.Add("?tickets", MySqlDbType.Int32).Value = festival.tickets;
-                cmd.Parameters.Add("?id", MySqlDbType.Int32).Value = festival.id;
-                cmd.ExecuteNonQuery();
-            }
-
-        }
-        [Route("festival/{id}")]
-        [HttpPost]
-        public IActionResult Festival(Festival model)
-        {
-            // als form niet goed is ingevuld
-            if (!ModelState.IsValid)
-                return View(model);
-
-            // wel geod ingevuld
-            SaveTickets(model);
-
-            return Redirect("/gelukt");
-        }
     }
-    
+
 }
